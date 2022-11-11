@@ -1,26 +1,36 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-  </div>
+	<div id="app">
+		<NavBar/>
+
+
+
+		<HomeView/>
+		<router-view>
+
+		</router-view>
+
+	</div>
 </template>
 
 <script>
 
+import NavBar from "@/components/NavBar"
+import HomeView from "@/components/HomeView"
 
 export default {
-  name: 'App',
-  components: {
-    
-  }
+	name: 'App',
+	components: {
+		HomeView,
+		NavBar,
+	}
 }
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  margin-top: 60px;
+	font-family: Avenir, Helvetica, Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	color: #2c3e50;
 }
 </style>
