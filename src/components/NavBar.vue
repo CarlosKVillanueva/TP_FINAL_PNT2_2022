@@ -22,7 +22,7 @@
 						</router-link>
 					</li>
 					<li class="nav-item active">
-						<router-link to="/familares" class="nav-link">
+						<router-link to="/familiares" class="nav-link">
 							<a class="nav-link" href="#">Familiares<span class="sr-only">(current)</span></a>
 						</router-link>
 					</li>
@@ -34,9 +34,8 @@
 				</ul>
 			</div>
 				<form class="form-inline my-2 my-lg-0">
-					<button class="btn btn-custom my-2 mx-1 my-sm-0" type="submit">Ingresar</button>
-					<button class="btn btn-custom my-2 mx-1 my-sm-0" type="submit">Registrarse</button>
-
+					<button class="btn my-2 mx-1 my-sm-0" style="color: #E5561C; " type="submit">Iniciar sesión</button>
+					<button class="btn btn-custom my-2 mx-1 my-sm-0" type="submit">Registrarte</button>
 				</form>
 		</nav>
 

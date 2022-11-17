@@ -48,6 +48,7 @@ h2 {
 	color: #f1f1f1;
 	border-radius: 15px;
 	font-family: "Roboto", sans-serif;
+	font-size: 16px;
 }
 
 html {

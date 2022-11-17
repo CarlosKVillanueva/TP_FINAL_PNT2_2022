@@ -23,7 +23,7 @@ export const router = new VueRouter( {
             path: '/mascotas', component: Mascota
         },
         {
-            path: '/familiar', component: Familiar
+            path: '/familiares', component: Familiar
         }
     ]
 } )
