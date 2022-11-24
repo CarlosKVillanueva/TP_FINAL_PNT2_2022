@@ -5,27 +5,7 @@
             <h2>Registrar Mascota</h2>
             <vue-form :state="formState" @submit.prevent="enviar()">
 
-                <!-- ---------------------------------- -->
-                <!--            CAMPO DNI               -->
-                <!-- ---------------------------------- -->
-                
-                <validate tag="div">
-                    <label for="id">Id</label>
-                    <input
-                            type="text"
-                            id="id"
-                            class="form-control"
-                            autocomplete="off"
-                            v-model="formData.id"
-                            name="id"
-                            required
-                    >
-                    <field-messages name="id" show="$dirty">
-                        <div slot="required" class="alert alert-danger mt-1">Campo requerido</div>
-                    </field-messages>
-                </validate>
-
-                <!-- ---------------------------------- -->
+               <!-- ---------------------------------- -->
                 <!--            CAMPO NOMBRE            -->
                 <!-- ---------------------------------- -->
 
@@ -179,16 +159,25 @@ export default {
             }
         },
         async enviar() {
+            const mascota = {
+                id: `${ Date.now() }-${ this.formData.nombre }`,
+                nombre: this.formData.nombre,
+                raza: this.formData.raza,
+                fechaNacimiento: this.formData.fechaNacimiento,
+                edad: this.formData.edad,
+                peso: this.formData.peso
+            }
             try {
-                await this.axios.post(this.url, this.formData, { 'content-type' : 'application/json' })
+                await this.axios.post( this.url, mascota, { 'content-type': 'application/json' } )
                 //console.log(usuario)
                 //this.mascotas.push(this.formData)
-            }catch(error) {
-                console.error('Error en el guardado de la mascota:', error.message)
+            } catch ( error ) {
+                console.error( 'Error en el guardado de la mascota:', error.message )
             }
             //this.$emit('form-data-hijo', this.formData)
             this.formData = this.getInitialData()
             this.formState._reset()
+            window.location.reload();
         },
     },
     computed: {},
@@ -197,11 +186,12 @@ export default {
 
 <style scoped lang="css">
 
-label{
+label {
     margin-top: 5px;
     padding-top: 1rem;
 }
-.jumbotron{
+
+.jumbotron {
     background: #F2CFB6;
-  }
+}
 </style>

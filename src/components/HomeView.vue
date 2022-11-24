@@ -12,7 +12,10 @@
 							srcset=""
 						/>
 						<p class="small mt-3 ">Tratamos a tu mascota como si fuera nuestra propia familia con el mejor servicio y paquetes especiales.</p>
-						<button type="button" class="btn btn-custom btn-lg btn-block">Reserva un turno</button>
+
+                        <router-link to="/turnos" class="nav-link">
+                            <button class="nav-link btn btn-custom btn-lg btn-block" href="#">Reserva tu turno</button>
+                        </router-link>
 
 					</div>
 
