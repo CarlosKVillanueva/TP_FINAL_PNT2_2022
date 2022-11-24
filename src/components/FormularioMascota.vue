@@ -6,6 +6,26 @@
             <vue-form :state="formState" @submit.prevent="enviar()">
 
                 <!-- ---------------------------------- -->
+                <!--            CAMPO DNI               -->
+                <!-- ---------------------------------- -->
+                
+                <validate tag="div">
+                    <label for="id">Id</label>
+                    <input
+                            type="text"
+                            id="id"
+                            class="form-control"
+                            autocomplete="off"
+                            v-model="formData.id"
+                            name="id"
+                            required
+                    >
+                    <field-messages name="id" show="$dirty">
+                        <div slot="required" class="alert alert-danger mt-1">Campo requerido</div>
+                    </field-messages>
+                </validate>
+
+                <!-- ---------------------------------- -->
                 <!--            CAMPO NOMBRE            -->
                 <!-- ---------------------------------- -->
 
@@ -122,7 +142,7 @@
                     </field-messages>
                 </validate>
 
-                <button class="btn btn-success my-3" :disabled="formState.$invalid">Enviar</button>
+                <button class="btn btn-success my-3" :disabled="formState.$invalid">Registrar mascota</button>
 
             </vue-form>
         </div>
@@ -139,6 +159,7 @@ export default {
         return {
             formState: {},
             formData: this.getInitialData(),
+            url: "http://localhost:8080/api/mascotas",
             nombreMinLength: 3,
             razaMinLength: 5,
             edadMin: 0,
@@ -157,12 +178,18 @@ export default {
                 peso: null,
             }
         },
-        enviar() {
-            // console.log({...this.formData})
-
+        async enviar() {
+            try {
+                await this.axios.post(this.url, this.formData, { 'content-type' : 'application/json' })
+                //console.log(usuario)
+                //this.mascotas.push(this.formData)
+            }catch(error) {
+                console.error('Error en el guardado de la mascota:', error.message)
+            }
+            //this.$emit('form-data-hijo', this.formData)
             this.formData = this.getInitialData()
             this.formState._reset()
-        }
+        },
     },
     computed: {},
 };
@@ -174,4 +201,7 @@ label{
     margin-top: 5px;
     padding-top: 1rem;
 }
+.jumbotron{
+    background: #F2CFB6;
+  }
 </style>

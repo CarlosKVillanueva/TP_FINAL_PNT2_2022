@@ -33,10 +33,6 @@
 					</li>
 				</ul>
 			</div>
-				<form class="form-inline my-2 my-lg-0">
-					<button class="btn my-2 mx-1 my-sm-0" style="color: #E5561C; " type="submit">Iniciar sesión</button>
-					<button class="btn btn-custom my-2 mx-1 my-sm-0" type="submit">Registrarte</button>
-				</form>
 		</nav>
 
 	</section>

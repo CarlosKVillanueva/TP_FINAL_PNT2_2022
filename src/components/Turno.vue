@@ -4,9 +4,9 @@
             <h2>Lista de Turnos</h2>
             <hr />
             <hr />
-            <button class="btn btn-success my-3 mr-3" @click="getTurnosMDB()">
+            <!-- <button class="btn btn-success my-3 mr-3" @click="getTurnosMDB()">
                 GET Turnos
-            </button>
+            </button> -->
             <!-- <button class="btn btn-success my-3 mr-3" @click="getMascotasMDB()">POST Mascota</button> -->
             <div v-if="turnos.length" class="table-responsive">
                 <table class="table mt-5">
@@ -43,7 +43,9 @@ export default {
 		FormularioTurno,
 	},
     props: [],
-    mounted() {},
+    mounted() {
+        this.getTurnosMDB()
+    },
     data() {
         return {
             url: "http://localhost:8080/api/turnos",

@@ -6,6 +6,7 @@
 					Obtener Listado Mascotas
 				</button>
 			</div>-->
+            <h2>Listado de mascotas</h2>
             <div v-if="mascotas.length" class="table-responsive">
                 <table class="table mt-5">
                     <thead>
@@ -16,6 +17,7 @@
                             <th scope="col">Fecha de nacimiento</th>
                             <th scope="col">Edad</th>
                             <th scope="col">Peso</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -26,6 +28,7 @@
                             <td>{{ mascota.fechaNacimiento }}</td>
                             <td>{{ mascota.edad }}</td>
                             <td>{{ mascota.peso }}</td>
+                            <td><button class="btn btn-danger" @click="deleteMascotasMDB(mascota.id)"><i class="fa-solid fa-trash"></i></button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -37,16 +40,17 @@
 			</div>
 
 			<div>
-				<FormularioMascota v-if="showComponent"/>
+				<FormularioMascota v-if="showComponent" /> 
+                <!-- @formDataHijo="formData=$event" -->
 			</div>
 
 			<div v-if="showComponent" class="d-flex justify-content-center">
 				<button class="btn btn-danger my-3 mr-3" @click="renderForm(), renderButton()">
-					Atras
+					Cancelar
 				</button>
-				<button class="btn btn-success my-3 mr-3" @click="postMascotaMDB">
+				<!-- <button class="btn btn-success my-3 mr-3" @click="postMascotaMDB">
 					Enviar
-				</button>
+				</button> -->
 			</div>
         </div>
     </div>
@@ -80,16 +84,11 @@ export default {
                 console.error(error);
             }
         },
-		async postMascotaMDB(){
-            /*let mascotaNew = {
-                nombre:"", //formData,
-            }*/
+        async deleteMascotasMDB(id) {
             try {
-                let { data : mascotaNew } = await this.axios.post(this.url, mascotaNew, { 'content-type' : 'application/json' })
-                //console.log(usuario)
-                this.mascotas.push(mascotaNew)
-            }catch(error) {
-                console.error('Error en el guardado de la mascota:', error.message)
+                await this.axios.delete(`${this.url}?id=${id}`);
+            } catch (error) {
+                console.error(error);
             }
         },
 		renderForm() {
