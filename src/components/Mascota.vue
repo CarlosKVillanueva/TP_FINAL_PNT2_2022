@@ -1,18 +1,11 @@
 <template>
     <div class="container">
         <div class="col-12 mt-5">
-            <h2>Lista de Mascotas</h2>
-			<hr />
-            <hr />
-            <button class="btn btn-success my-3 mr-3" @click="getMascotasMDB()">
-                GET Mascotas
-            </button>
-			<button
-                class="btn btn-success my-3 mr-3"
-                @click="postMascotaMDB()"
-            >
-                POST Mascota
-            </button>
+<!--			<div class="d-flex justify-content-center">
+				<button class="btn btn-success my-3 mr-3" @click="getMascotasMDB()">
+					Obtener Listado Mascotas
+				</button>
+			</div>-->
             <div v-if="mascotas.length" class="table-responsive">
                 <table class="table mt-5">
                     <thead>
@@ -36,9 +29,24 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>
+				<div class="d-flex justify-content-center">
+					<button v-if="showButton" class="btn btn-success my-3 mr-3" @click="renderForm(), renderButton()">
+						Registrar Mascota
+					</button>
+				</div>
+			</div>
+
 			<div>
-				<FormularioMascota />
+				<FormularioMascota v-if="showComponent"/>
+			</div>
+
+			<div v-if="showComponent" class="d-flex justify-content-center">
+				<button class="btn btn-danger my-3 mr-3" @click="renderForm(), renderButton()">
+					Atras
+				</button>
+				<button class="btn btn-success my-3 mr-3" @click="postMascotaMDB">
+					Enviar
+				</button>
 			</div>
         </div>
     </div>
@@ -52,25 +60,19 @@ export default {
 		FormularioMascota,
 	},
     props: [],
-    mounted() {},
+    mounted() {
+        this.getMascotasMDB()
+    },
     data() {
         return {
             url: "http://localhost:8080/api/mascotas",
+			showComponent: false,
+            showButton: true,
             mascotas: [],
         };
     },
     methods: {
         async getMascotasMDB() {
-            //https://www.npmjs.com/package/axios
-            //https://github.com/axios/axios
-            //https://axios-http.com/
-
-            // ----- Promise con Sintaxis then/catch -----
-            /* this.axios(this.url)
-          .then( respuesta => { this.posts = respuesta.data })
-          .catch( error => console.error(error) ) */
-
-            // ----- Promise con Sintaxis async/await -----
             try {
                 let respuesta = await this.axios(this.url);
                 this.mascotas = respuesta.data;
@@ -78,7 +80,24 @@ export default {
                 console.error(error);
             }
         },
-		postMascotaMDB(){}
+		async postMascotaMDB(){
+            /*let mascotaNew = {
+                nombre:"", //formData,
+            }*/
+            try {
+                let { data : mascotaNew } = await this.axios.post(this.url, mascotaNew, { 'content-type' : 'application/json' })
+                //console.log(usuario)
+                this.mascotas.push(mascotaNew)
+            }catch(error) {
+                console.error('Error en el guardado de la mascota:', error.message)
+            }
+        },
+		renderForm() {
+			this.showComponent = !this.showComponent
+		},
+        renderButton() {
+            this.showButton = !this.showButton
+        },
     },
     computed: {},
 };
