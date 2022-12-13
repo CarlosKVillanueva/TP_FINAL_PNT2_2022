@@ -108,10 +108,10 @@ export default {
         return {
             formState: {},
             formData: this.getInitialData(),
-            url: "http://localhost:8080/api/familiares",
-            urlMascotas: "http://localhost:8080/api/mascotas",
+            urlFamiliares: this.$store.state.urlFamiliares,
+            urlMascotas: this.$store.state.urlMascotas,
+            urlTurnos: this.$store.state.urlTurnos,
             familiares: [],
-            urlTurnos: "http://localhost:8080/api/turnos",
             mascotas:[]
         };
     },
@@ -126,7 +126,7 @@ export default {
         },
         async getFamiliaresMDB() {
             try {
-                let respuesta = await this.axios(this.url);
+                let respuesta = await this.axios(this.urlFamiliares);
                 this.familiares = respuesta.data;
             } catch (error) {
                 console.error(error);

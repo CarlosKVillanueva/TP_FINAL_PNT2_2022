@@ -14,7 +14,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="turno in turnos" :key="turno.id">
+                        <tr v-for="turno in this.turnos" :key="turno.id">
                             <td>{{ turno.fecha }}</td>
                             <td>{{ turno.hora }}</td>
                             <td>{{ turno.familiar.dni }}</td>
@@ -60,7 +60,7 @@ export default {
     },
     data() {
         return {
-            url: "http://localhost:8080/api/turnos",
+            url: this.$store.state.urlTurnos,
             turnos: [],
             showComponent: false,
             showButton: true,

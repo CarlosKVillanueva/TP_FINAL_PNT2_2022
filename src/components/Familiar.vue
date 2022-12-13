@@ -15,7 +15,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="familiar in familiares" :key="familiar.id">
+                    <tr v-for="familiar in this.$store.state.familiares" :key="familiar.id">
                         <td>{{ familiar.dni }}</td>
                         <td>{{ `${ familiar.nombre } ${ familiar.apellido }` }}</td>
                         <td>{{ familiar.email }}</td>
@@ -62,7 +62,7 @@ export default {
     },
     data() {
         return {
-            url: "http://localhost:8080/api/familiares",
+            url: this.$store.state.urlFamiliares,
             familiares: [],
             showComponent: false,
             showButton: true,

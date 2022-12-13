@@ -16,7 +16,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="mascota in mascotas" :key="mascota.id">
+                    <tr v-for="mascota in this.$store.state.mascotas" :key="mascota.id">
                         <td>{{ mascota.id }}</td>
                         <td>{{ mascota.nombre }}</td>
                         <td>{{ mascota.raza }}</td>
@@ -65,7 +65,7 @@ export default {
     },
     data() {
         return {
-            url: "http://localhost:8080/api/mascotas",
+            url: this.$store.state.urlMascotas,
             showComponent: false,
             showButton: true,
             mascotas: [],
