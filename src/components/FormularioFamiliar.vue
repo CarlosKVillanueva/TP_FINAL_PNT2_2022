@@ -166,7 +166,7 @@ export default {
         return {
             formState: {},
             formData: this.getInitialData(),
-            url: "http://localhost:8080/api/familiares",
+            url: this.$store.state.urlFamiliares,
             minLength: 8,
             maxLength: 9,
             nombreMinLength: 3,

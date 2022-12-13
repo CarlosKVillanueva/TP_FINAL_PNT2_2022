@@ -1,7 +1,17 @@
 <template>
     <div class="container">
         <div class="col-12 mt-5">
-            <h2>Listado de Mascotas</h2>
+          <h2
+              :style="{
+             backgroundColor: showButton ? '#FCF1E7' : 'green',
+             color: showButton ? 'black' : 'white',
+             padding: '10px',
+             borderRadius: '10px'
+          }"
+              class="text-center"
+          >
+            {{ 'Lista de Mascotas' | pasarAMayuscula  | wrap('##--## ',' ##--##')}}
+          </h2>
             <div v-if="mascotas.length" class="table-responsive">
                 <table class="table mt-5">
                     <thead>
@@ -76,6 +86,7 @@ export default {
             try {
                 let respuesta = await this.axios( this.url );
                 this.mascotas = respuesta.data;
+                this.$store.dispatch('cargarMascotas', this.mascotas)
             } catch ( error ) {
                 console.error( error );
             }

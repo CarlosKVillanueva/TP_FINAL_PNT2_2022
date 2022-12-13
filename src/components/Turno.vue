@@ -1,7 +1,17 @@
 <template>
     <div class="container">
         <div class="col-12 mt-5">
-            <h2>Lista de Turnos</h2>
+          <h2
+              :style="{
+             backgroundColor: showButton ? '#FCF1E7' : 'green',
+             color: showButton ? 'black' : 'white',
+             padding: '10px',
+             borderRadius: '10px'
+          }"
+              class="text-center"
+          >
+            {{ 'Lista de Turnos' | pasarAMayuscula  | wrap('**--** ',' **--**')}}
+          </h2>
             <div v-if="turnos.length" class="table-responsive">
                 <table class="table mt-5">
                     <thead>
@@ -14,7 +24,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="turno in this.turnos" :key="turno.id">
+                        <tr v-for="turno in this.$store.state.turnos" :key="turno.id">
                             <td>{{ turno.fecha }}</td>
                             <td>{{ turno.hora }}</td>
                             <td>{{ turno.familiar.dni }}</td>
@@ -77,6 +87,7 @@ export default {
             try {
                 let respuesta = await this.axios(this.url);
                 this.turnos = respuesta.data;
+                this.$store.dispatch('cargarTurnos', this.turnos)
             } catch (error) {
                 console.error(error);
             }
