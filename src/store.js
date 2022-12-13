@@ -4,7 +4,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-    state : {
+    state: {
         urlFamiliares: "http://localhost:8080/api/familiares",
         urlMascotas: "http://localhost:8080/api/mascotas",
         urlTurnos: "http://localhost:8080/api/turnos",
@@ -12,26 +12,26 @@ export default new Vuex.Store({
         mascotas: [],
         turnos: []
     },
-    actions : {
+    actions: {
         cargarFamiliares({commit}, familiares) {
-            commit("cargarFamiliares", familiares)
+            commit("cargarFamiliaresMDB", familiares)
         },
         cargarMascotas({commit}, mascotas) {
-            commit("cargarMascotas", mascotas)
+            commit("cargarMascotasMDB", mascotas)
         },
         cargarTurnos({commit}, turnos) {
-            commit("cargarTurnos", turnos)
+            commit("cargarTurnosMDB", turnos)
         },
 
     },
-    mutations : {
-        cargarFamiliares(state, familiares) {
-            state.familiares = familiares
+    mutations: {
+        cargarFamiliaresMDB(state, familiares) {
+            state.familiares = familiares;
         },
-        cargarMascotas(state, mascotas) {
+        cargarMascotasMDB(state, mascotas) {
             state.mascotas = mascotas
         },
-        cargarTurnos(state, turnos) {
+        cargarTurnosMDB(state, turnos) {
             state.turnos = turnos
         },
 

@@ -15,7 +15,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="familiar in this.$store.state.familiares" :key="familiar.id">
+                    <tr v-for="familiar in $store.state.familiares" :key="familiar.id">
                         <td>{{ familiar.dni }}</td>
                         <td>{{ `${ familiar.nombre } ${ familiar.apellido }` }}</td>
                         <td>{{ familiar.email }}</td>
@@ -81,6 +81,7 @@ export default {
             try {
                 let respuesta = await this.axios( this.url );
                 this.familiares = respuesta.data;
+                await this.$store.commit('cargarFamiliares', this.familiares)
             } catch ( error ) {
                 console.error( error );
             }
