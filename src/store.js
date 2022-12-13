@@ -34,6 +34,5 @@ export default new Vuex.Store({
         cargarTurnosMDB(state, turnos) {
             state.turnos = turnos
         },
-
     }
 })
